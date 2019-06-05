@@ -7,7 +7,6 @@ Assume was completed
 
 ### Prerequisites
 1. Create a Control Plane. Walkthrough available in [this repo](https://github.com/pivotal-samuel-sanders/terraforming-aws-control-plane/README.md).
-1. Pave IaaS for PKS (or PAS). Walktrhough available in [this repo](https://github.com/pivotal-samuel-sanders/terraforming-aws-pks) **TODO update this to be just terraform**
 
 ### Get Started
 1. Deploy and run the [Test Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/test-pipeline/README.md) to confirm your setup.

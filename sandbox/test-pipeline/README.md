@@ -1,4 +1,4 @@
-#  Deploy the Test Pipeline
+#   Test Pipeline
 
 1.  Download Platform Automation
     ```
@@ -66,7 +66,7 @@
 
 1.  Create the Test Pipeline
     ```
-    fly -t sam-ci set-pipeline -p test-pipeline -c sandbox/test-pipeline/pipeline.yml -l sandbox/test-pipeline/pipeline-vars.yml
+    fly -t sam-ci set-pipeline -p test-pipeline -c sandbox/test-pipeline/pipeline.yml -l sandbox/test-pipeline/vars.yml
 
     fly -t sam-ci unpause-pipeline -p test-pipeline
     ```

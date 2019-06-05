@@ -1,4 +1,8 @@
-#  Deploy the Install Ops Manager Pipeline
+#   Install Ops Manager Pipeline
+
+1.  Pave IaaS for PKS (or PAS)
+
+    Walkthrough available in [this repo](https://github.com/pivotal-samuel-sanders/terraforming-aws-pks) (**TODO** update this repo to just terraform, move the config to this repo)
 
 1.  Login to Control Plane Credhub
 
@@ -52,7 +56,7 @@
 
 1.  Create the Install Ops Manager Pipeline
     ```
-    fly -t sam-ci set-pipeline -p install-ops-manager-pipeline -c sandbox/install-ops-manager-pipeline/pipeline.yml -l sandbox/install-ops-manager-pipeline/pipeline-vars.yml
+    fly -t sam-ci set-pipeline -p install-ops-manager-pipeline -c sandbox/install-ops-manager-pipeline/pipeline.yml -l sandbox/install-ops-manager-pipeline/vars.yml
 
     fly -t sam-ci unpause-pipeline -p install-ops-manager-pipeline
     ```
