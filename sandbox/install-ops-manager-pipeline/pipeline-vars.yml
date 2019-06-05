@@ -1,0 +1,5 @@
+---
+region: us-east-1
+bucket: pcf.practice.platform-automation
+config-repo: git@github.com:pivotal-samuel-sanders/pcf-automation.git
+credhub-server: https://credhub.control.fionathebluepittie.com:8844
