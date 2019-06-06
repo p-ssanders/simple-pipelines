@@ -1,8 +1,6 @@
 #   Install Ops Manager Pipeline
 
-1.  Pave IaaS for PKS (or PAS)
-
-    Walkthrough available in [this repo](https://github.com/pivotal-samuel-sanders/terraforming-aws-pks) (**TODO** update this repo to just terraform, move the config to this repo)
+1.  [Pave the IaaS](../../terraform/README.md) for PKS
 
 1.  Login to Control Plane Credhub
 
@@ -42,11 +40,13 @@
 
     Note: Create a git deploy key for your repository following [these instructions](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys).
     ```
-    credhub set -t value -n /concourse/main/credhub-client -v credhub_admin_client
-    credhub set -t value -n /concourse/main/credhub-secret -v <YOUR CONTROL PLANE CREDHUB SECRET>
-    credhub set -t certificate -n /concourse/main/credhub-cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)"
-    credhub set -t value -n /concourse/main/sandbox/pivnet-api-token -v <YOUR PIVNET API TOKEN>
-    credhub set -t ssh -n /concourse/main/git-deploy-key --private id_rsa --public id_rsa.pub
+    credhub set -t value -n /concourse/main/credhub-client -v credhub_admin_client && \
+    credhub set -t value -n /concourse/main/credhub-secret -v <YOUR CONTROL PLANE CREDHUB SECRET> && \
+    credhub set -t certificate -n /concourse/main/credhub-cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)" && \
+    credhub set -t ssh -n /concourse/main/git-deploy-key --private id_rsa --public id_rsa.pub && \
+    credhub set -t value -n /concourse/main/sandbox/pivnet-api-token -v <YOUR PIVNET API TOKEN> && \
+    credhub set -t value -n '/concourse/main/sandbox/access_key_id' -v <YOUR ACCESS KEY> && \
+    credhub set -t value -n '/concourse/main/sandbox/secret_access_key' -v <YOUR SECRET KEY>
     ```
 
 1.  Login to Concourse

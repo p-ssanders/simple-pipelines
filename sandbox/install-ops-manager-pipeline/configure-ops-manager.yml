@@ -1,0 +1,14 @@
+---
+opsman-configuration:
+  aws:
+    region: us-east-1
+    vm_name: pks-ops-manager-vm
+    vpc_subnet_id: subnet-04ca160416d9380f2
+    security_group_id: sg-091151d84b8636d62
+    key_pair_name: sandbox-ops-manager-key
+    iam_instance_profile_name: sandbox_ops_manager
+    public_ip: 34.237.153.178
+    access_key_id: ((access_key_id))
+    secret_access_key: ((secret_access_key))
+    boot_disk_size: 100
+    instance_type: r4.large

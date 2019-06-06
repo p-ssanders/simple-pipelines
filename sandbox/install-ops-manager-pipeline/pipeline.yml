@@ -57,3 +57,13 @@ jobs:
         CONFIG_FILE: sandbox/install-ops-manager-pipeline/download-ops-manager.yml
       input_mapping:
         config: interpolated-config
+    - task: create-vm
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/create-vm.yml
+      params:
+        OPSMAN_CONFIG_FILE: sandbox/install-ops-manager-pipeline/configure-ops-manager.yml
+        STATE_FILE: sandbox/install-ops-manager-pipeline/state.yml
+      input_mapping:
+        image: downloaded-product
+        config: interpolated-config
+        state: interpolated-config

@@ -1,2 +1,7 @@
 .envrc
 deploy-keys/
+*.tfvars
+*.tfstate
+*.tfplan
+.terraform
+sandbox/certs/*.pem
