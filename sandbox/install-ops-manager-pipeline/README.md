@@ -46,7 +46,9 @@
     credhub set -t ssh -n /concourse/main/git-deploy-key --private id_rsa --public id_rsa.pub && \
     credhub set -t value -n /concourse/main/sandbox/pivnet-api-token -v <YOUR PIVNET API TOKEN> && \
     credhub set -t value -n '/concourse/main/sandbox/access_key_id' -v <YOUR ACCESS KEY> && \
-    credhub set -t value -n '/concourse/main/sandbox/secret_access_key' -v <YOUR SECRET KEY>
+    credhub set -t value -n '/concourse/main/sandbox/secret_access_key' -v <YOUR SECRET KEY> && \
+    credhub set -t value -n '/concourse/main/sandbox/ops-manager-password' -v "$(openssl rand -base64 16)" && \
+    credhub set -t value -n '/concourse/main/sandbox/ops-manager-decryption-passphrase' -v "$(openssl rand -base64 32)"
     ```
 
 1.  Login to Concourse

@@ -87,3 +87,12 @@ jobs:
             params:
               repository: configuration-commit
               merge: true
+    - task: configure-authentication
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/configure-authentication.yml
+      params:
+        ENV_FILE: sandbox/install-ops-manager-pipeline/env.yml
+        AUTH_CONFIG_FILE: sandbox/install-ops-manager-pipeline/auth.yml
+      input_mapping:
+        env: interpolated-config
+        config: interpolated-config
