@@ -1,6 +1,7 @@
 ---
 opsman-configuration:
   aws:
+    # TODO -- how parameterize this stuff without putting it all in credhub?
     region: us-east-1
     vm_name: pks-ops-manager-vm
     vpc_subnet_id: subnet-04ca160416d9380f2
