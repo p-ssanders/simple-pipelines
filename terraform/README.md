@@ -26,9 +26,9 @@ Note: the `terraform/modules` directory can probably be replaced with the `modul
 
     *   Copy the certificate files into `sandbox/certs` (as these certs are for `sandbox` environment)
         ```
-        sudo cp -r /etc/letsencrypt/live/sandbox.fionathebluepittie.com/* sandbox/certs/
+        sudo cp -r /etc/letsencrypt/live/sandbox.fionathebluepittie.com/* ../sandbox/certs/
 
-        sudo chown ssanders:staff sandbox/certs
+        sudo chown ssanders:staff ../sandbox/certs
         ```
 
 1.  "Pave the IaaS"

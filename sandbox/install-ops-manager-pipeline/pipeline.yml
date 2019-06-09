@@ -96,3 +96,25 @@ jobs:
       input_mapping:
         env: interpolated-config
         config: interpolated-config
+    - task: configure-tls
+      image: platform-automation-image
+      params:
+        ENV_FILE: sandbox/install-ops-manager-pipeline/env.yml
+        CERTIFICATE_PEM: |
+          ((lets_encrypt_cert.certificate))
+          ((lets_encrypt_cert.ca))
+        PRIVATE_KEY_PEM: ((lets_encrypt_cert.private_key))
+      input_mapping:
+        env: interpolated-config
+      config:
+        platform: linux
+        inputs:
+        - name: env
+        run:
+          path: bash
+          args:
+            - "-c"
+            - |
+              om --env env/"${ENV_FILE}" update-ssl-certificate \
+              --certificate-pem "$CERTIFICATE_PEM" \
+              --private-key-pem "$PRIVATE_KEY_PEM"

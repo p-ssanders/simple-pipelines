@@ -4,4 +4,4 @@ deploy-keys/
 *.tfstate
 *.tfplan
 .terraform
-sandbox/certs/*.pem
+sandbox/certs/
