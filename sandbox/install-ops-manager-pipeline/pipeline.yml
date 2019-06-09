@@ -129,3 +129,10 @@ jobs:
         env: interpolated-config
         config: interpolated-config
         vars: interpolated-config
+    - task: apply-director-changes
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/apply-director-changes.yml
+      params:
+        ENV_FILE: sandbox/install-ops-manager-pipeline/env.yml
+      input_mapping:
+        env: interpolated-config
