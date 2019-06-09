@@ -53,16 +53,19 @@
         * `private_key.pem` contains the contents of `../certs/private_key.pem`
 
         ```
-        credhub set -t value -n /concourse/main/credhub-client -v credhub_admin_client && \
-        credhub set -t value -n /concourse/main/credhub-secret -v <YOUR CONTROL PLANE CREDHUB SECRET> && \
-        credhub set -t certificate -n /concourse/main/credhub-cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)" && \
-        credhub set -t ssh -n /concourse/main/git-deploy-key --private id_rsa --public id_rsa.pub && \
-        credhub set -t value -n /concourse/main/sandbox/pivnet-api-token -v <YOUR PIVNET API TOKEN> && \
+        credhub set -t ssh -n '/concourse/main/git-deploy-key' --private id_rsa --public id_rsa.pub && \
+        credhub set -t value -n '/concourse/main/credhub-client' -v credhub_admin_client && \
+        credhub set -t value -n '/concourse/main/credhub-secret' -v <YOUR CONTROL PLANE CREDHUB SECRET> && \
+        credhub set -t certificate -n '/concourse/main/sandbox/lets_encrypt_cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)" && \
+        credhub set -t value -n '/concourse/main/sandbox/pivnet-api-token' -v <YOUR PIVNET API TOKEN> && \
         credhub set -t value -n '/concourse/main/sandbox/access_key_id' -v <YOUR ACCESS KEY> && \
         credhub set -t value -n '/concourse/main/sandbox/secret_access_key' -v <YOUR SECRET KEY> && \
+        credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_access_key' -v <terraform output ops_manager_iam_user_access_key> && \
+        credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_secret_key' -v <terraform output ops_manager_iam_user_secret_key> && \
         credhub set -t value -n '/concourse/main/sandbox/ops-manager-password' -v "$(openssl rand -base64 16)" && \
         credhub set -t value -n '/concourse/main/sandbox/ops-manager-decryption-passphrase' -v "$(openssl rand -base64 32)" && \
-        credhub set -n '/concourse/main/sandbox/lets_encrypt_cert -t certificate -r "$(cat ca.pem)" -c "$(cat cert.pem)" -p "$(cat private_key.pem.rsa.key)"
+        credhub set -t ssh -n '/concourse/main/sandbox/ops_manager_ssh_private_key' -p <terraform output ops_manager_ssh_private_key> && \
+        credhub set -t value -n /concourse/main/sandbox/rds_password -v <terraform output rds_password>
         ```
 
 1.  Login to Concourse

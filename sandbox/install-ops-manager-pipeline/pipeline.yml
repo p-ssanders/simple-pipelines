@@ -43,7 +43,7 @@ jobs:
         CREDHUB_CLIENT: ((credhub-client))
         CREDHUB_SECRET: ((credhub-secret))
         CREDHUB_SERVER: ((credhub-server))
-        CREDHUB_CA_CERT: ((credhub-cert.ca))
+        CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
         PREFIX: /concourse/main/sandbox
         INTERPOLATION_PATHS: sandbox/install-ops-manager-pipeline
       input_mapping:
@@ -118,3 +118,14 @@ jobs:
               om --env env/"${ENV_FILE}" update-ssl-certificate \
               --certificate-pem "$CERTIFICATE_PEM" \
               --private-key-pem "$PRIVATE_KEY_PEM"
+    - task: configure-bosh-director
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/configure-director.yml
+      params:
+        ENV_FILE: sandbox/install-ops-manager-pipeline/env.yml
+        DIRECTOR_CONFIG_FILE: sandbox/install-ops-manager-pipeline/bosh-director.yml
+        VARS_FILES: vars/sandbox/install-ops-manager-pipeline/bosh-director-vars.yml
+      input_mapping:
+        env: interpolated-config
+        config: interpolated-config
+        vars: interpolated-config

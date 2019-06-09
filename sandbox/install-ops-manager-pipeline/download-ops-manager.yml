@@ -1,3 +1,4 @@
+---
 pivnet-api-token: ((pivnet-api-token))
 pivnet-file-glob: "ops-manager-aws*.yml"
 pivnet-product-slug: ops-manager
