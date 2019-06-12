@@ -54,7 +54,7 @@ jobs:
         CREDHUB_SERVER: ((credhub-server))
         CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
         PREFIX: /concourse/main/sandbox
-        INTERPOLATION_PATHS: sandbox/install-ops-manager
+        INTERPOLATION_PATHS: sandbox
       input_mapping:
         files: configuration
       output_mapping:
@@ -167,7 +167,7 @@ jobs:
         CREDHUB_SERVER: ((credhub-server))
         CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
         PREFIX: /concourse/main/sandbox
-        INTERPOLATION_PATHS: sandbox/install-ops-manager
+        INTERPOLATION_PATHS: sandbox
       input_mapping:
         files: configuration
       output_mapping:
