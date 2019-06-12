@@ -54,7 +54,7 @@ jobs:
         CREDHUB_SERVER: ((credhub-server))
         CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
         PREFIX: /concourse/main/sandbox
-        INTERPOLATION_PATHS: sandbox/install-ops-manager-pipeline
+        INTERPOLATION_PATHS: sandbox/install-ops-manager
       input_mapping:
         files: configuration
       output_mapping:
@@ -63,14 +63,14 @@ jobs:
       image: platform-automation-image
       file: platform-automation-tasks/tasks/download-product.yml
       params:
-        CONFIG_FILE: sandbox/install-ops-manager-pipeline/download-ops-manager.yml
+        CONFIG_FILE: sandbox/install-ops-manager/download-ops-manager.yml
       input_mapping:
         config: interpolated-config
     - task: create-vm
       image: platform-automation-image
       file: platform-automation-tasks/tasks/create-vm.yml
       params:
-        OPSMAN_CONFIG_FILE: sandbox/install-ops-manager-pipeline/configure-ops-manager.yml
+        OPSMAN_CONFIG_FILE: sandbox/install-ops-manager/configure-ops-manager.yml
         STATE_FILE: sandbox/state.yml
       input_mapping:
         image: downloaded-product
@@ -101,7 +101,7 @@ jobs:
       file: platform-automation-tasks/tasks/configure-authentication.yml
       params:
         ENV_FILE: sandbox/env.yml
-        AUTH_CONFIG_FILE: sandbox/install-ops-manager-pipeline/auth.yml
+        AUTH_CONFIG_FILE: sandbox/install-ops-manager/auth.yml
       input_mapping:
         env: interpolated-config
         config: interpolated-config
@@ -132,8 +132,8 @@ jobs:
       file: platform-automation-tasks/tasks/configure-director.yml
       params:
         ENV_FILE: sandbox/env.yml
-        DIRECTOR_CONFIG_FILE: sandbox/install-ops-manager-pipeline/bosh-director.yml
-        VARS_FILES: vars/sandbox/install-ops-manager-pipeline/bosh-director-vars.yml
+        DIRECTOR_CONFIG_FILE: sandbox/install-ops-manager/bosh-director.yml
+        VARS_FILES: vars/sandbox/install-ops-manager/bosh-director-vars.yml
       input_mapping:
         env: interpolated-config
         config: interpolated-config
@@ -167,7 +167,7 @@ jobs:
         CREDHUB_SERVER: ((credhub-server))
         CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
         PREFIX: /concourse/main/sandbox
-        INTERPOLATION_PATHS: sandbox/install-ops-manager-pipeline
+        INTERPOLATION_PATHS: sandbox/install-ops-manager
       input_mapping:
         files: configuration
       output_mapping:
