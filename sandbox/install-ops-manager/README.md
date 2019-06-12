@@ -75,8 +75,8 @@
 
 1.  Create the Install Ops Manager Pipeline
     ```
-    fly -t sam-ci set-pipeline -p install-ops-manager-pipeline -c sandbox/install-ops-manager-pipeline/pipeline.yml -l sandbox/install-ops-manager-pipeline/vars.yml
+    fly -t sam-ci set-pipeline -p install-ops-manager -c sandbox/install-ops-manager/pipeline.yml -l sandbox/install-ops-manager/vars.yml
 
-    fly -t sam-ci unpause-pipeline -p install-ops-manager-pipeline
+    fly -t sam-ci unpause-pipeline -p install-ops-manager
     ```
     * Note: The test pipeline has no triggers, so start it manually.
