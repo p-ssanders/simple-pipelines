@@ -1,8 +1,8 @@
 ---
-region: us-east-1
-credhub-server: https://credhub.control.fionathebluepittie.com:8844
-platform-automation-bucket: pcf.practice.platform-automation
-ops-manager-bucket: com.fionathebluepittie.sandbox
-config-repo: git@github.com:pivotal-samuel-sanders/pcf-automation.git
 git-author-email: pipeline-bot@fionathebluepittie.com
 git-author-name: "Pipeline Bot"
+config-repo: git@github.com:pivotal-samuel-sanders/pcf-automation.git
+credhub-server: https://credhub.control.fionathebluepittie.com:8844
+region: us-east-1
+platform-automation-bucket: pcf.practice.platform-automation
+ops-manager-bucket: com.fionathebluepittie.sandbox
