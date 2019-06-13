@@ -1,0 +1,8 @@
+---
+git-author-email: pipeline-bot@fionathebluepittie.com
+git-author-name: "Pipeline Bot"
+config-repo: git@github.com:pivotal-samuel-sanders/pcf-automation.git
+credhub-server: https://credhub.control.fionathebluepittie.com:8844
+region: us-east-1
+platform-automation-bucket: pcf.practice.platform-automation
+env-bucket: com.fionathebluepittie.sandbox
