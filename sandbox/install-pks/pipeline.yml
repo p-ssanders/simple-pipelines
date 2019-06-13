@@ -44,7 +44,7 @@ resources:
     regexp: pks/stemcells/(.*).tgz
 
 jobs:
-- name: fetch-pks
+- name: download-pks
   plan:
     - aggregate:
       - get: platform-automation-tasks
@@ -63,7 +63,7 @@ jobs:
         CREDHUB_SERVER: ((credhub-server))
         CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
         PREFIX: /concourse/main/sandbox
-        INTERPOLATION_PATHS: sandbox/install-pks
+        INTERPOLATION_PATHS: sandbox
       input_mapping:
         files: configuration
       output_mapping:
@@ -72,7 +72,7 @@ jobs:
       image: platform-automation-image
       file: platform-automation-tasks/tasks/download-product.yml
       params:
-        CONFIG_FILE: sandbox/install-pks/pks.yml
+        CONFIG_FILE: sandbox/install-pks/download-pks.yml
       input_mapping:
         config: interpolated-config
       output_mapping:

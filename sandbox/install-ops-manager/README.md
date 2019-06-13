@@ -56,7 +56,7 @@
         credhub set -t ssh -n '/concourse/main/git-deploy-key' --private id_rsa --public id_rsa.pub && \
         credhub set -t value -n '/concourse/main/credhub-client' -v credhub_admin_client && \
         credhub set -t value -n '/concourse/main/credhub-secret' -v <YOUR CONTROL PLANE CREDHUB SECRET> && \
-        credhub set -t certificate -n '/concourse/main/sandbox/lets_encrypt_cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)" && \
+        credhub set -t certificate -n '/concourse/main/lets_encrypt_cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)" && \
         credhub set -t value -n '/concourse/main/sandbox/pivnet-api-token' -v <YOUR PIVNET API TOKEN> && \
         credhub set -t value -n '/concourse/main/sandbox/access_key_id' -v <YOUR ACCESS KEY> && \
         credhub set -t value -n '/concourse/main/sandbox/secret_access_key' -v <YOUR SECRET KEY> && \
