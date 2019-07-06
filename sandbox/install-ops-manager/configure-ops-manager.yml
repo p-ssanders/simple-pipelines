@@ -4,7 +4,7 @@ opsman-configuration:
     # TODO -- how parameterize this stuff without putting it all in credhub?
     region: us-east-1
     vm_name: pks-ops-manager
-    vpc_subnet_id: subnet-01bfde8579c4086db
+    vpc_subnet_id: subnet-0e93ffbffd380cca6
     security_group_id: sg-09c97333340fa95eb
     key_pair_name: sandbox-ops-manager-key
     iam_instance_profile_name: sandbox_pks-master
