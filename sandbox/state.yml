@@ -1,3 +1,1 @@
-iaas: aws
-vm_id: i-05e0d5690e1db2530
-
+{"iaas": "aws", "vm_id":"i-0ef2adb49572aae49"}
