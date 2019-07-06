@@ -51,7 +51,7 @@
 
 1.  Create the Install Ops Manager Pipeline
     ```
-    fly -t sam-ci set-pipeline -p install-pks -c sandbox/install-pks/pipeline.yml -l sandbox/install-pks/vars.yml
+    fly -t sam-ci set-pipeline -p install-pks -c sandbox/install-pks/pipeline.yml
 
     fly -t sam-ci unpause-pipeline -p install-pks
     ```

@@ -37,7 +37,7 @@ Note: the `modules` directory can probably be replaced with the `modules` direct
 
     *   Terraform
         ```
-        cd terraforminging-pks/terraforming-pks
+        cd terraform/terraforming-pks
 
         terraform init
         terraform plan -out=pks.tfplan
