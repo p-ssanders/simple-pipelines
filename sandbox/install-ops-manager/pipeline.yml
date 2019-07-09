@@ -99,6 +99,7 @@ jobs:
     - task: configure-authentication
       image: platform-automation-image
       file: platform-automation-tasks/tasks/configure-authentication.yml
+      attempts: 3
       params:
         ENV_FILE: sandbox/env.yml
         AUTH_CONFIG_FILE: sandbox/install-ops-manager/auth.yml
