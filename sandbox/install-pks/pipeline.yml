@@ -150,7 +150,7 @@ jobs:
       file: platform-automation-tasks/tasks/configure-product.yml
       params:
         ENV_FILE: sandbox/env.yml
-        CONFIG_FILE: sandbox/sandbox/install-pks/pks-config.yml
+        CONFIG_FILE: sandbox/install-pks/pks-config.yml
       input_mapping:
         env: interpolated-config
         config: interpolated-config
