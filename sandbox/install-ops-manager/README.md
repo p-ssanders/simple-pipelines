@@ -45,7 +45,16 @@
         openssl rsa -in ../certs/privkey.pem -out ../certs/private_key.pem.rsa.key
         ```
 
-    *   Create Entries in the Control Plane Credhub
+    *   Update Entries in the Control Plane Credhub
+
+        ```
+        credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_access_key' -v <terraform output ops_manager_iam_user_access_key> && \
+        credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_secret_key' -v <terraform output ops_manager_iam_user_secret_key> && \
+        credhub set -t ssh -n '/concourse/main/sandbox/ops_manager_ssh_private_key' -p <terraform output ops_manager_ssh_private_key> && \
+        credhub set -t value -n /concourse/main/sandbox/rds_password -v <terraform output rds_password>
+        ```
+
+    *   Or, Create Entries in the Control Plane Credhub
 
         Let:
         * `ca.pem` contains the contents of `../certs/chain.pem`

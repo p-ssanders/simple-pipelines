@@ -1,0 +1,7 @@
+---
+pks_master_iam_instance_profile_name: sandbox_pks-master
+pks_worker_iam_instance_profile_name: sandbox_pks-worker
+pks_api_hostname: api.pks.sandbox.fionathebluepittie.com
+pks_api_target_groups:
+- sandbox-pks-tg-9021
+- sandbox-pks-tg-8443
