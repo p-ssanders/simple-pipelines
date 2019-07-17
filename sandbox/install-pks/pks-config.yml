@@ -127,7 +127,9 @@ resource-config:
     instance_type:
       id: automatic
     internet_connected: false
-    elb_names: ((pks_api_target_groups))
+    elb_names:
+    - sandbox-pks-tg-9021
+    - sandbox-pks-tg-8443
     additional_vm_extensions:
     - pks-api-lb-security-groups
 errand-config:
