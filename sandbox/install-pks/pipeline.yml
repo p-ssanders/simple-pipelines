@@ -82,6 +82,7 @@ jobs:
       # - put: pks-stemcell
       #   params:
       #     file: downloaded-stemcell/*.tgz
+
 - name: upload-and-stage-pks
   plan:
     - get: platform-automation-tasks
@@ -126,7 +127,6 @@ jobs:
     - get: platform-automation-image
       params:
         unpack: true
-    - get: pks-product
     - get: configuration
       trigger: true
       passed:
