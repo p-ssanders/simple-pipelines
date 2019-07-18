@@ -59,3 +59,8 @@
     fly -t sam-ci unpause-pipeline -p install-pks
     ```
     * Note: The test pipeline has no triggers, so start it manually.
+
+1.  Login to PKS API
+    ```
+    pks login -u admin -p <UAA ADMIN PASSWORD FROM PKS TILE> -a api.pks.sandbox.fionathebluepittie.com --ca-cert sandbox/certs/cert.pem
+    ```

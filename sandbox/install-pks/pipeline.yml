@@ -34,16 +34,8 @@ resources:
     bucket: com.fionathebluepittie.sandbox
     regexp: pks/products/pivotal-container-service-(.*).pivotal
 
-# - name: pks-stemcell
-#   type: s3
-#   source:
-#     access_key_id: ((access_key_id))
-#     secret_access_key: ((secret_access_key))
-#     region: us-east-1
-#     bucket: com.fionathebluepittie.sandbox
-#     regexp: pks/stemcells/(.*).tgz
-
 jobs:
+# TODO terraform?
 - name: download-pks
   plan:
     - aggregate:
@@ -79,9 +71,6 @@ jobs:
       - put: pks-product
         params:
           file: downloaded-product/pivotal-container-service-*.pivotal
-      # - put: pks-stemcell
-      #   params:
-      #     file: downloaded-stemcell/*.tgz
 
 - name: upload-and-stage-pks
   plan:
