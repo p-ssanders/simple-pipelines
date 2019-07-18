@@ -12,6 +12,6 @@ The work was done on AWS, but can be adapted, conceptually, for any IaaS.
 
 ### Get Started
 1. Pave the IaaS for your PKS using the included [Terraform](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/terraform).
-1. Deploy and run the [Test Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/test-pipeline/README.md) to confirm your setup.
-1. Deploy and run the [Install Ops Manager Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/install-ops-manager-pipeline/README.md).
-1. **TODO** Deploy and run the [Install PKS Pipeline]().
+1. Deploy and run the [Test Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/test) to confirm your setup.
+1. Deploy and run the [Install Ops Manager Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/install-ops-manager).
+1. Deploy and run the [Install PKS Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/install-pks).
