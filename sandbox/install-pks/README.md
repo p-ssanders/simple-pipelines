@@ -41,7 +41,10 @@
     *   Create Entries in the Control Plane Credhub
 
         ```
-
+        credhub set -n /concourse/main/sandbox/lets_encrypt_cert -t certificate -r "$(cat pks/pks-certs/ca.pem)" -c "$(cat pks/pks-certs/certificate.pem)" -p "$(cat pks/pks-certs/private_key.pem)" && \
+        credhub set -n /concourse/main/sandbox/pks_api_hostname -t value -v api.pks.sandbox.fionathebluepittie.com && \
+        credhub set -n /concourse/main/sandbox/pks_master_iam_instance_profile_name -t value -v sandbox_pks-master && \
+        credhub set -n /concourse/main/sandbox/pks_worker_iam_instance_profile_name -t value -v sandbox_pks-worker
         ```
 
 1.  Login to Concourse

@@ -90,10 +90,10 @@ jobs:
     - get: platform-automation-image
       params:
         unpack: true
-    - get: configuration
     - get: pks-product
+    - get: configuration
       trigger: true
-      passed: 
+      passed:
       - download-pks
     - task: credhub-interpolate
       image: platform-automation-image
@@ -126,10 +126,10 @@ jobs:
     - get: platform-automation-image
       params:
         unpack: true
-    - get: configuration
     - get: pks-product
+    - get: configuration
       trigger: true
-      passed: 
+      passed:
       - upload-and-stage-pks
     - task: credhub-interpolate
       image: platform-automation-image

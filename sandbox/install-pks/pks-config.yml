@@ -110,7 +110,7 @@ product-properties:
     value: 1
 network-properties:
   network:
-    name: infrastructure
+    name: pks
   other_availability_zones:
   - name: us-east-1c
   - name: us-east-1b
@@ -128,8 +128,8 @@ resource-config:
       id: automatic
     internet_connected: false
     elb_names:
-    - sandbox-pks-tg-9021
-    - sandbox-pks-tg-8443
+    - alb:sandbox-pks-tg-9021
+    - alb:sandbox-pks-tg-8443
     additional_vm_extensions:
     - pks-api-lb-security-groups
 errand-config:
