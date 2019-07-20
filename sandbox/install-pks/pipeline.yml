@@ -7,6 +7,12 @@ resources:
     private_key: ((git-deploy-key.private_key))
     branch: master
 
+- name: terraform-image
+  type: docker-image
+  source:
+    repository: hashicorp/terraform
+    tag: 0.11.14
+
 - name: platform-automation-tasks
   type: s3
   source:
@@ -35,7 +41,23 @@ resources:
     regexp: pks/products/pivotal-container-service-(.*).pivotal
 
 jobs:
-# TODO terraform?
+- name: pave-iaas
+  plan:
+    - aggregate:
+      - get: terraform-image
+      - get: configuration
+    - task: terraform-apply
+      image: terraform-image
+      file: configuration/tasks/terraform-apply.yml
+      input_mapping:
+        configuration: configuration
+      params:
+        CONFIG_DIR: terraform/terraforming-pks
+        TF_VAR_access_key: ((access_key_id))
+        TF_VAR_secret_key: ((secret_access_key))
+        TF_VAR_ssl_cert: ((lets_encrypt_cert.certificate))
+        TF_VAR_ssl_private_key: ((lets_encrypt_cert.private_key))
+
 - name: download-pks
   plan:
     - aggregate:
@@ -46,7 +68,6 @@ jobs:
         params:
           unpack: true
       - get: configuration
-        trigger: true
     - task: credhub-interpolate
       image: platform-automation-image
       file: platform-automation-tasks/tasks/credhub-interpolate.yml

@@ -1,0 +1,27 @@
+---
+platform: linux
+inputs:
+- name: configuration
+params:
+  CONFIG_DIR:
+  TF_VAR_access_key: 
+  TF_VAR_secret_key:
+  TF_VAR_ssl_cert:
+  TF_VAR_ssl_private_key:
+run:
+  path: sh
+  args:
+  - "-c"
+  - |
+    set -eux
+
+    cd configuration/${CONFIG_DIR}
+
+    export AWS_ACCESS_KEY_ID="${TF_VAR_access_key}"
+    export AWS_SECRET_ACCESS_KEY="${TF_VAR_secret_key}"
+
+    TF_VAR_ssl_cert="${TF_VAR_ssl_cert}" \
+    TF_VAR_ssl_private_key="${TF_VAR_ssl_private_key}" \
+    terraform init
+    terraform plan -out=pks.tfplan
+    terraform apply pks.tfplan

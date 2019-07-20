@@ -1,6 +1,5 @@
 .envrc
 deploy-keys/
-*.tfvars
 *.tfstate
 *.tfplan
 .terraform

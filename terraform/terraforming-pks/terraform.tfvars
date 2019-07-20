@@ -6,15 +6,8 @@ hosted_zone        = "sandbox.fionathebluepittie.com"
 vpc_cidr           = "10.0.0.0/16"
 rds_instance_count = 1
 
-ssl_cert = <<EOF
-
-EOF
-
-ssl_private_key = <<EOF
-
-EOF
-
 tags = {
     Team = "sam"
     Project = "pks"
 }
+
