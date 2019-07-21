@@ -13,8 +13,6 @@ run:
   args:
   - "-c"
   - |
-    set -eux
-
     cd configuration/${CONFIG_DIR}
 
     export AWS_ACCESS_KEY_ID="${TF_VAR_access_key}"
