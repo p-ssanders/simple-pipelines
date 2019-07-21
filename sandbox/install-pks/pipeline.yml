@@ -40,12 +40,19 @@ resources:
     bucket: com.fionathebluepittie.sandbox
     regexp: pks/products/pivotal-container-service-(.*).pivotal
 
+- name: daily-trigger
+  type: time
+  source:
+    interval: 24h
+
 jobs:
 - name: pave-iaas
   plan:
     - aggregate:
       - get: terraform-image
       - get: configuration
+      - get: daily-trigger
+        trigger: true
     - task: terraform-apply
       image: terraform-image
       file: configuration/tasks/terraform-apply.yml
