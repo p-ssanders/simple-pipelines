@@ -1,6 +1,6 @@
-#   PCF Automation
+#   Simple Pipelines
 
-This repository contains [Concourse](https://concourse-ci.org) pipelines that can create, and update PCF foundations using [Platform Automation](http://docs.pivotal.io/platform-automation).
+This repository contains simple [Concourse](https://concourse-ci.org) pipelines that perform single, atomic, yet interesting work related to the creation, and maintenance of PCF foundations using [Platform Automation](http://docs.pivotal.io/platform-automation).
 
 Currently there is only one environment: `sandbox`.
 
@@ -8,7 +8,7 @@ The work was done on AWS, but can be adapted, conceptually, for any IaaS.
 
 ##  Prerequisites
 
-1. Create a Control Plane using [Control Plane with Let's Encrypt Certificates on AWS](https://github.com/pivotal-samuel-sanders/terraforming-aws-control-plane) as a guide.
+*   Create a Control Plane using [Control Plane with Let's Encrypt Certificates on AWS](https://github.com/pivotal-samuel-sanders/terraforming-aws-control-plane) as a guide.
 
 ##  Generate Let's Encrypt Certificates
 
