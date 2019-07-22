@@ -39,7 +39,7 @@ product-properties:
     value: false
   .properties.plan1_selector.active.description:
     value: "Example: This plan will configure a lightweight kubernetes cluster. Not
-      recommended for production workloads.\r\n\r\nWut"
+      recommended for production workloads.\r\n\r\n"
   .properties.plan1_selector.active.master_az_placement:
     value:
     - us-east-1b
@@ -48,7 +48,7 @@ product-properties:
   .properties.plan1_selector.active.max_worker_instances:
     value: 50
   .properties.plan1_selector.active.name:
-    value: small-sammy
+    value: small
   .properties.plan1_selector.active.worker_az_placement:
     value:
     - us-east-1a

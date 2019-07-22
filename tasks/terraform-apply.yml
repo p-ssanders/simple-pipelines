@@ -22,4 +22,4 @@ run:
     TF_VAR_ssl_private_key="${TF_VAR_ssl_private_key}" \
     terraform init
     terraform plan -out=pks.tfplan
-    terraform apply pks.tfplan
+    terraform apply pks.tfplan --auto-approve

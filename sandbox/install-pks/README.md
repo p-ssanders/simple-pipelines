@@ -62,5 +62,9 @@
 
 1.  Login to PKS API
     ```
-    pks login -u admin -p <UAA ADMIN PASSWORD FROM PKS TILE> -a api.pks.sandbox.fionathebluepittie.com --ca-cert sandbox/certs/cert.pem
+    eval "$(om bosh-env -i /tmp/pks-opsmgrkey)"
+    om credentials -p pivotal-container-service -c '.properties.uaa_admin_password' -f secret
+    pks login -u admin -p <THE PASSWORD> -a api.pks.sandbox.fionathebluepittie.com --ca-cert sandbox/certs/cert.pem
     ```
+
+1.  **TODO** Do something with PKS
