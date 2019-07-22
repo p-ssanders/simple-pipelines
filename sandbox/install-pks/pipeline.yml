@@ -13,23 +13,23 @@ resources:
     repository: hashicorp/terraform
     tag: 0.11.14
 
-- name: platform-automation-tasks
-  type: s3
-  source:
-    access_key_id: ((access_key_id))
-    secret_access_key: ((secret_access_key))
-    region: us-east-1
-    bucket: pcf.practice.platform-automation
-    regexp: platform-automation/platform-automation-tasks-(.*).zip
-
 - name: platform-automation-image
   type: s3
   source:
     access_key_id: ((access_key_id))
     secret_access_key: ((secret_access_key))
     region: us-east-1
-    bucket: pcf.practice.platform-automation
-    regexp: platform-automation/platform-automation-image-(.*).tgz
+    bucket: com.fionathebluepittie.sandbox
+    regexp: platform-automation-image-(.*).tgz
+
+- name: platform-automation-tasks
+  type: s3
+  source:
+    access_key_id: ((access_key_id))
+    secret_access_key: ((secret_access_key))
+    region: us-east-1
+    bucket: com.fionathebluepittie.sandbox
+    regexp: platform-automation-tasks-(.*).zip
 
 - name: pks-product
   type: s3

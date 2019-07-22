@@ -84,7 +84,7 @@
 
 1.  Create the Install Ops Manager Pipeline
     ```
-    fly -t sam-ci set-pipeline -p install-ops-manager -c sandbox/install-ops-manager/pipeline.yml -l sandbox/install-ops-manager/vars.yml
+    fly -t sam-ci set-pipeline -p install-ops-manager -c sandbox/install-ops-manager/pipeline.yml
 
     fly -t sam-ci unpause-pipeline -p install-ops-manager
     ```

@@ -5,8 +5,8 @@ resources:
   source:
     access_key_id: ((access_key_id))
     secret_access_key: ((secret_access_key))
-    region: ((region))
-    bucket: ((bucket))
+    region: us-east-1
+    bucket: com.fionathebluepittie.sandbox
     regexp: platform-automation/platform-automation-tasks-(.*).zip
 
 - name: platform-automation-image-s3
@@ -14,8 +14,8 @@ resources:
   source:
     access_key_id: ((access_key_id))
     secret_access_key: ((secret_access_key))
-    region: ((region))
-    bucket: ((bucket))
+    region: us-east-1
+    bucket: com.fionathebluepittie.sandbox
     regexp: platform-automation/platform-automation-image-(.*).tgz
 
 jobs:

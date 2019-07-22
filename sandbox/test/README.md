@@ -13,9 +13,9 @@
     ```
     aws configure
 
-    aws s3 cp platform-automation-image-3.0.1.tgz s3://pcf.practice.platform-automation/platform-automation/
+    aws s3 cp platform-automation-image-3.0.1.tgz s3://com.fionathebluepittie.sandbox/platform-automation/
 
-    aws s3 cp platform-automation-tasks-3.0.1.zip s3://pcf.practice.platform-automation/platform-automation/
+    aws s3 cp platform-automation-tasks-3.0.1.zip s3://com.fionathebluepittie.sandbox/platform-automation/
     ```
     * Note: you can now delete the local copies of Platform Automation
 
@@ -66,7 +66,7 @@
 
 1.  Create the Test Pipeline
     ```
-    fly -t sam-ci set-pipeline -p test-pipeline -c sandbox/test-pipeline/pipeline.yml -l sandbox/test-pipeline/vars.yml
+    fly -t sam-ci set-pipeline -p test-pipeline -c sandbox/test/pipeline.yml
 
     fly -t sam-ci unpause-pipeline -p test-pipeline
     ```

@@ -1,47 +1,78 @@
 ---
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
+
 resources:
 - name: configuration
   type: git
   source:
-    uri: ((config-repo))
+    uri: git@github.com:pivotal-samuel-sanders/simple-pipelines.git
     private_key: ((git-deploy-key.private_key))
     branch: master
 
-- name: platform-automation-tasks
-  type: s3
+- name: platform-automation-pivnet
+  type: pivnet
   source:
-    access_key_id: ((access_key_id))
-    secret_access_key: ((secret_access_key))
-    region: ((region))
-    bucket: ((platform-automation-bucket))
-    regexp: platform-automation/platform-automation-tasks-(.*).zip
+    api_token: ((pivnet-api-token))
+    product_slug: platform-automation
+    product_version: 3\.0
+    sort_by: semver
 
 - name: platform-automation-image
   type: s3
   source:
     access_key_id: ((access_key_id))
     secret_access_key: ((secret_access_key))
-    region: ((region))
-    bucket: ((platform-automation-bucket))
+    region: us-east-1
+    bucket: com.fionathebluepittie.sandbox
     regexp: platform-automation/platform-automation-image-(.*).tgz
+
+- name: platform-automation-tasks
+  type: s3
+  source:
+    access_key_id: ((access_key_id))
+    secret_access_key: ((secret_access_key))
+    region: us-east-1
+    bucket: com.fionathebluepittie.sandbox
+    regexp: platform-automation/platform-automation-tasks-(.*).zip
 
 - name: ops-manager-backup
   type: s3
   source:
     access_key_id: ((access_key_id))
     secret_access_key: ((secret_access_key))
-    region: ((region))
-    bucket: ((ops-manager-bucket))
+    region: us-east-1
+    bucket: com.fionathebluepittie.sandbox
     regexp: ops-manager/installation-(.*).zip
 
 jobs:
+- name: fetch-platform-automation
+  plan:
+  - get: platform-automation-pivnet
+    trigger: true
+  - aggregate:
+    - put: platform-automation-image
+      params:
+        file: platform-automation-pivnet/*image*.tgz
+    - put: platform-automation-tasks
+      params:
+        file: platform-automation-pivnet/*tasks*.zip
+
 - name: install-ops-manager
   plan:
     - aggregate:
       - get: platform-automation-tasks
+        passed:
+        - fetch-platform-automation
         params:
           unpack: true
       - get: platform-automation-image
+        passed:
+        - fetch-platform-automation
         params:
           unpack: true
       - get: configuration
@@ -51,7 +82,7 @@ jobs:
       params:
         CREDHUB_CLIENT: ((credhub-client))
         CREDHUB_SECRET: ((credhub-secret))
-        CREDHUB_SERVER: ((credhub-server))
+        CREDHUB_SERVER: "https://credhub.control.fionathebluepittie.com:8844"
         CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
         PREFIX: /concourse/main/sandbox
         INTERPOLATION_PATHS: sandbox
@@ -89,8 +120,8 @@ jobs:
             params:
               FILE_SOURCE_PATH: state.yml
               FILE_DESTINATION_PATH: sandbox/state.yml
-              GIT_AUTHOR_EMAIL: ((git-author-email))
-              GIT_AUTHOR_NAME: ((git-author-name))
+              GIT_AUTHOR_EMAIL: "pipeline-bot@fionathebluepittie.com"
+              GIT_AUTHOR_NAME: "Pipeline Bot"
               COMMIT_MESSAGE: "update ops manager state file"
           - put: configuration
             params:
@@ -166,7 +197,7 @@ jobs:
       params:
         CREDHUB_CLIENT: ((credhub-client))
         CREDHUB_SECRET: ((credhub-secret))
-        CREDHUB_SERVER: ((credhub-server))
+        CREDHUB_SERVER: "https://credhub.control.fionathebluepittie.com:8844"
         CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
         PREFIX: /concourse/main/sandbox
         INTERPOLATION_PATHS: sandbox
