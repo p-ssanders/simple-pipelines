@@ -63,8 +63,56 @@
 1.  Login to PKS API
     ```
     eval "$(om bosh-env -i /tmp/pks-opsmgrkey)"
-    om credentials -p pivotal-container-service -c '.properties.uaa_admin_password' -f secret
-    pks login -u admin -p <THE PASSWORD> -a api.pks.sandbox.fionathebluepittie.com --ca-cert sandbox/certs/cert.pem
+    ADMIN_PASSWORD=$(om credentials \
+    -p pivotal-container-service \
+    -c '.properties.uaa_admin_password' \
+    -f secret)
+
+    pks login -a https://api.pks.sandbox.fionathebluepittie.com -u admin -p ${ADMIN_PASSWORD} --ca-cert sandbox/certs/cert.pem
     ```
 
-1.  **TODO** Do something with PKS
+1.  Create a Cluster
+    ```
+    pks clusters
+    pks create-cluster cluster-1 --num-nodes 3 --plan small --external-hostname cluster-1.sandbox.fionathebluepittie.com
+    watch pks cluster cluster-1
+    ```
+
+1.  Create a Load Balancer for the Cluster
+
+    Use instructions at https://docs.pivotal.io/pks/1-4/aws-cluster-load-balancer.html#create
+
+1.  Access the Cluster
+    ```
+    pks cluster cluster-1
+    pks get-credentials cluster-1
+    kubectl config use-context cluster-1
+    kubectl cluster-info
+    ```
+
+1.  Login to the Dashboard
+
+    *   Create a file `~/expose-k8s-dashboard.yml` with the following content:
+        ```
+        ---
+        apiVersion: rbac.authorization.k8s.io/v1beta1
+        kind: ClusterRoleBinding
+        metadata:
+        name: kubernetes-dashboard
+        labels:
+            k8s-app: kubernetes-dashboard
+        roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+        subjects:
+        - kind: ServiceAccount
+        name: kubernetes-dashboard
+        namespace: kube-system
+        ```
+
+    *   Run: `kubectl create -f ~/expose-k8s-dashboard.yml`
+    *   Run: `kubectl proxy`
+    *   Browse to: http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy and select the ~/kubeconfig file if prompted to do so.
+
+1.  Deploy an App **TODO**
