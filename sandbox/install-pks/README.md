@@ -78,6 +78,10 @@
     watch pks cluster cluster-1
     ```
 
+1.  Create a Load Balancer for the Cluster
+
+    Use instructions at https://docs.pivotal.io/pks/1-4/aws-cluster-load-balancer.html#create
+
 1.  Access the Cluster
     ```
     pks cluster cluster-1
@@ -113,5 +117,6 @@
 
 1.  Deploy an App
     *   Tag public subnets with the cluster information by following instructions at https://docs.pivotal.io/pks/1-4/deploy-workloads.html#aws
+
         This will allow Kubernetes to ceate load balancers for services **(?)**
     *   Follow instructions at https://kubernetes.io/docs/tutorials/stateless-application/guestbook/ to deploy an app
