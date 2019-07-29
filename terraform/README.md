@@ -1,5 +1,7 @@
 #   Terraform for PKS
 
+**TODO** this should move into `sandbox` as it's terraform for the sandbox env?
+
 Note: the `modules` directory can probably be replaced with the `modules` directory from a new `terraforming-aws` release if necessary.
 
 1.  "Pave the IaaS"
@@ -15,7 +17,7 @@ Note: the `modules` directory can probably be replaced with the `modules` direct
         terraform apply pks.tfplan
         ```
 
-1.  Create BOSH Director Database
+1.  Create BOSH Director Database **TODO this won't work because there is no Ops Manager VM yet!**
 
     ```
     terraform output ops_manager_ssh_private_key > /tmp/pks-opsmgrkey

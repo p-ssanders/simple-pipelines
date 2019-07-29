@@ -159,6 +159,7 @@ jobs:
               om --env env/"${ENV_FILE}" update-ssl-certificate \
               --certificate-pem "$CERTIFICATE_PEM" \
               --private-key-pem "$PRIVATE_KEY_PEM"
+    # - task: create-bosh-database TODO
     - task: configure-bosh-director
       image: platform-automation-image
       file: platform-automation-tasks/tasks/configure-director.yml

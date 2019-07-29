@@ -80,7 +80,8 @@
 
 1.  Create a Load Balancer for the Cluster
 
-    Use instructions at https://docs.pivotal.io/pks/1-4/aws-cluster-load-balancer.html#create
+    *   Use instructions at https://docs.pivotal.io/pks/1-4/aws-cluster-load-balancer.html#create
+    *   Update DNS with an aliased A record that maps the cluster external hostname to the load balancer
 
 1.  Access the Cluster
     ```
