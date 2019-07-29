@@ -78,11 +78,6 @@
     watch pks cluster cluster-1
     ```
 
-1.  Create a Load Balancer for the Cluster
-
-    *   Use instructions at https://docs.pivotal.io/pks/1-4/aws-cluster-load-balancer.html#create
-    *   Update DNS with an aliased A record that maps the cluster external hostname to the load balancer
-
 1.  Access the Cluster
     ```
     pks cluster cluster-1
@@ -114,6 +109,9 @@
 
     *   Run: `kubectl create -f ~/expose-k8s-dashboard.yml`
     *   Run: `kubectl proxy`
-    *   Browse to: http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy and select the ~/kubeconfig file if prompted to do so.
+    *   Browse to: http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy and select `~/.kube/config` if prompted to do so.
 
-1.  Deploy an App **TODO**
+1.  Deploy an App
+    *   Tag public subnets with the cluster information by following instructions at https://docs.pivotal.io/pks/1-4/deploy-workloads.html#aws
+        This will allow Kubernetes to ceate load balancers for services **(?)**
+    *   Follow instructions at https://kubernetes.io/docs/tutorials/stateless-application/guestbook/ to deploy an app
