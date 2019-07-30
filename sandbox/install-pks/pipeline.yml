@@ -3,7 +3,7 @@ resources:
 - name: configuration
   type: git
   source:
-    uri: git@github.com:pivotal-samuel-sanders/simple-pipelines.git
+    uri: git@github.com:p-ssanders/simple-pipelines.git
     private_key: ((git-deploy-key.private_key))
     branch: master
 

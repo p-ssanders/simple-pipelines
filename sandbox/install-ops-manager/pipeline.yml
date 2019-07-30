@@ -49,6 +49,12 @@ resources:
     bucket: com.fionathebluepittie.sandbox
     regexp: ops-manager/installation-(.*).zip
 
+- name: mysql-image
+  type: docker-image
+  source:
+    repository: mysql/remote
+    tag: 8.0
+
 jobs:
 - name: fetch-platform-automation
   plan:
@@ -160,7 +166,7 @@ jobs:
               --certificate-pem "$CERTIFICATE_PEM" \
               --private-key-pem "$PRIVATE_KEY_PEM"
     - task: create-bosh-director-database
-      image: platform-automation-image
+      image: mysql-image
       file: configuration/tasks/create-bosh-database.yml
       params:
         RDS_ADDRESS: ((rds_address))
