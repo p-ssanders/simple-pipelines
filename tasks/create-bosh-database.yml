@@ -11,8 +11,11 @@ run:
   - "-c"
   - |
 
-    mysql -h "${RDS_ADDRESS}" \
-    -P "${RDS_PORT}" \
-    -u "${RDS_USERNAME}" \
-    -p "${RDS_PASSWORD}" \
-    -e "create database bosh;"
+    set -x
+
+    mysql \
+    --host="${RDS_ADDRESS}" \
+    --port="${RDS_PORT}" \
+    --user="${RDS_USERNAME}" \
+    --password="${RDS_PASSWORD}" \
+    --execute="create database bosh;"

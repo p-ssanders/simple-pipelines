@@ -52,7 +52,7 @@ resources:
 - name: mysql-image
   type: docker-image
   source:
-    repository: mysql/remote
+    repository: mysql
     tag: 8.0
 
 jobs:
@@ -82,6 +82,7 @@ jobs:
         - fetch-platform-automation
         params:
           unpack: true
+      - get: mysql-image
     - task: credhub-interpolate
       image: platform-automation-image
       file: platform-automation-tasks/tasks/credhub-interpolate.yml
