@@ -1,19 +1,19 @@
 ---
-network_name: vpc-0409da7d0f6f01f00
-vpc_id: vpc-0409da7d0f6f01f00
-vms_security_group_id: sg-0d9a7369b9328233e
+network_name: vpc-0ef69ba56c8748868
+vpc_id: vpc-0ef69ba56c8748868
+vms_security_group_id: sg-0db1f069364882d29
 ops_manager_ssh_public_key_name: sandbox-ops-manager-key
-ops_manager_bucket: sandbox-ops-manager-bucket-13993
+ops_manager_bucket: sandbox-ops-manager-bucket-6274
 rds_address: sandbox.cmdzlyeatddk.us-east-1.rds.amazonaws.com
 rds_user: admin
 ntp_servers: 0.amazon.pool.ntp.org, 1.amazon.pool.ntp.org, 2.amazon.pool.ntp.org, 3.amazon.pool.ntp.org
-infrastructure_subnet_1: subnet-01bfde8579c4086db
-infrastructure_subnet_2: subnet-0e467078affd37f57
-infrastructure_subnet_3: subnet-0f5dbf996a79656e5
-pks_subnet_1: subnet-04817a3e9e5b4e1f3
-pks_subnet_2: subnet-09109838db4940624
-pks_subnet_3: subnet-0d9593445c5bbb971
-services_subnet_1: subnet-0ab95ac2dd480d91d
-services_subnet_2: subnet-037220319a66d36ea
-services_subnet_3: subnet-0bd037f74bda5e172
+infrastructure_subnet_1: subnet-0675a2312f862311e
+infrastructure_subnet_2: subnet-02a28cc39fea607ab
+infrastructure_subnet_3: subnet-0e6cbc165148f363a
+pks_subnet_1: subnet-00abaca5823cd2fa4
+pks_subnet_2: subnet-0751dc1577cfe00e0
+pks_subnet_3: subnet-0e73d2a81e6371d83
+services_subnet_1: subnet-0f07f541f2873ddc9
+services_subnet_2: subnet-02c8fb05dfd9a637c
+services_subnet_3: subnet-08cc87072608908f1
 

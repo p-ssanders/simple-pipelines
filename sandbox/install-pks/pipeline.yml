@@ -46,6 +46,7 @@ resources:
     interval: 24h
 
 jobs:
+# TODO migrate this to install-ops-manager pipeline
 - name: pave-iaas
   plan:
     - aggregate:

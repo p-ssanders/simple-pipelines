@@ -1,14 +1,13 @@
 ---
 opsman-configuration:
   aws:
-    # TODO -- how parameterize this stuff without putting it all in credhub?
     region: us-east-1
     vm_name: pks-ops-manager
-    vpc_subnet_id: subnet-0e93ffbffd380cca6
-    security_group_id: sg-09c97333340fa95eb
+    vpc_subnet_id: subnet-0d1ef4ee1f88ab21a
+    security_group_id: sg-0db1f069364882d29
     key_pair_name: sandbox-ops-manager-key
-    iam_instance_profile_name: sandbox_pks-master
-    public_ip: 3.95.77.195
+    iam_instance_profile_name: sandbox_ops_manager
+    public_ip: 3.224.82.225
     access_key_id: ((access_key_id))
     secret_access_key: ((secret_access_key))
     boot_disk_size: 100

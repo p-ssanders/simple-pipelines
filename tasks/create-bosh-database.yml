@@ -1,0 +1,23 @@
+---
+platform: linux
+params:
+  RDS_ADDRESS:
+  RDS_PORT:
+  RDS_USERNAME:
+  RDS_PASSWORD:
+run:
+  path: sh
+  args:
+  - "-c"
+  - |
+
+    echo "${RDS_ADDRESS}"
+    echo "${RDS_PORT}"
+    echo "${RDS_USERNAME}"
+    echo "${RDS_PASSWORD}"
+
+    mysql -h "${RDS_ADDRESS}" \
+    -P "${RDS_PORT}" \
+    -u "${RDS_USERNAME}" \
+    -p "${RDS_PASSWORD}" \
+    -e "create database bosh;"

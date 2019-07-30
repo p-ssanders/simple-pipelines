@@ -65,6 +65,7 @@ jobs:
 - name: install-ops-manager
   plan:
     - aggregate:
+      - get: configuration
       - get: platform-automation-tasks
         passed:
         - fetch-platform-automation
@@ -75,7 +76,6 @@ jobs:
         - fetch-platform-automation
         params:
           unpack: true
-      - get: configuration
     - task: credhub-interpolate
       image: platform-automation-image
       file: platform-automation-tasks/tasks/credhub-interpolate.yml
@@ -147,7 +147,7 @@ jobs:
         PRIVATE_KEY_PEM: ((lets_encrypt_cert.private_key))
       input_mapping:
         env: interpolated-config
-      config:
+      config: # TODO migrate this to a file in tasks/
         platform: linux
         inputs:
         - name: env
@@ -159,7 +159,14 @@ jobs:
               om --env env/"${ENV_FILE}" update-ssl-certificate \
               --certificate-pem "$CERTIFICATE_PEM" \
               --private-key-pem "$PRIVATE_KEY_PEM"
-    # - task: create-bosh-database TODO
+    - task: create-bosh-director-database
+      image: platform-automation-image
+      file: configuration/tasks/create-bosh-database.yml
+      params:
+        RDS_ADDRESS: ((rds_address))
+        RDS_PORT: ((rds_port))
+        RDS_USERNAME: ((rds_username))
+        RDS_PASSWORD: ((rds_password))
     - task: configure-bosh-director
       image: platform-automation-image
       file: platform-automation-tasks/tasks/configure-director.yml
