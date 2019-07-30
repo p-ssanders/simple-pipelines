@@ -4,7 +4,7 @@ opsman-configuration:
     region: us-east-1
     vm_name: pks-ops-manager
     vpc_subnet_id: subnet-0d1ef4ee1f88ab21a
-    security_group_id: sg-0db1f069364882d29
+    security_group_id: sg-07dc001eff0ef2031
     key_pair_name: sandbox-ops-manager-key
     iam_instance_profile_name: sandbox_ops_manager
     public_ip: 3.224.82.225
