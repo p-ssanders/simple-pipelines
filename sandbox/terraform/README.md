@@ -1,21 +1,14 @@
 #   Terraform for PKS
 
-**TODO** this should move into `sandbox` as it's terraform for the sandbox env?
-
 Note: the `modules` directory can probably be replaced with the `modules` directory from a new `terraforming-aws` release if necessary.
 
 1.  "Pave the IaaS"
-
-    *   Create a `terraform.tfvars` file using `terraform.tfvars-example` as a template
-
-    *   Terraform
-        ```
-        cd terraforming-pks
-
-        terraform init
-        terraform plan -out=pks.tfplan
-        terraform apply pks.tfplan
-        ```
+    ```
+    cd terraforming-pks
+    terraform init
+    terraform plan -out=pks.tfplan
+    terraform apply pks.tfplan
+    ```
 
 1.  Create BOSH Director Database **TODO this won't work because there is no Ops Manager VM yet!**
 

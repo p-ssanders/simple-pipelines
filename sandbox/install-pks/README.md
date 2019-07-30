@@ -20,7 +20,7 @@
 
     *   Get the Control Plane Credhub Password
         ```
-        credhub get -n "/p-bosh/control-plane/credhub_admin_client_password"
+        credhub get -n /p-bosh/control-plane/uaa_users_admin
         ```
 
     *   Login to Credhub

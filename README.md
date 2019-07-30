@@ -41,7 +41,7 @@ The work was done on AWS, but can be adapted, conceptually, for any IaaS.
 
 ##  Pave the Iaas
 
-Pave the IaaS for your PKS using the included [Terraform](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/terraform).
+Pave the IaaS for your PKS using the included [Terraform](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/terraform).
 
 ##  Deploy Pipelines
 

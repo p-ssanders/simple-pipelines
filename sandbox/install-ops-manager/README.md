@@ -2,6 +2,10 @@
 
 1.  [Pave the IaaS](../../terraform/README.md) for PKS
 
+1.  Update the following files with the values output from Terraform:
+    *   `bosh-director-vars.yml`
+    *   `configure-ops-manager.yml`
+
 1.  Login to Control Plane Credhub
 
     *   SSH to OpsManager VM
