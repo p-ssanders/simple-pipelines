@@ -82,7 +82,7 @@
         credhub set -t value -n /concourse/main/install-ops-manager/rds_address -v <terraform output rds_address> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_port -v <terraform output rds_port> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_username -v <terraform output rds_username> && \
-        credhub set -t value -n /concourse/main/sandbox/rds_password -v <terraform output rds_password>
+        credhub set -t value -n /concourse/main/install-ops-manager/rds_password -v <terraform output rds_password>
         ```
 
 1.  Login to Concourse

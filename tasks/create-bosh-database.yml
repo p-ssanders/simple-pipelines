@@ -11,11 +11,6 @@ run:
   - "-c"
   - |
 
-    echo "${RDS_ADDRESS}"
-    echo "${RDS_PORT}"
-    echo "${RDS_USERNAME}"
-    echo "${RDS_PASSWORD}"
-
     mysql -h "${RDS_ADDRESS}" \
     -P "${RDS_PORT}" \
     -u "${RDS_USERNAME}" \
