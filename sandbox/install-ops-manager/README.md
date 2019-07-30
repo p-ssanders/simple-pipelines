@@ -55,7 +55,8 @@
         credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_access_key' -v <terraform output ops_manager_iam_user_access_key> && \
         credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_secret_key' -v <terraform output ops_manager_iam_user_secret_key> && \
         credhub set -t ssh -n '/concourse/main/sandbox/ops_manager_ssh_private_key' -p <terraform output ops_manager_ssh_private_key> && \
-        credhub set -t value -n /concourse/main/sandbox/rds_password -v <terraform output rds_password>
+        credhub set -t value -n /concourse/main/install-ops-manager/rds_username -v <terraform output rds_username> && \
+        credhub set -t value -n /concourse/main/install-ops-manager/rds_password -v <terraform output rds_password>
         ```
 
     *   Or, Create Entries in the Control Plane Credhub
@@ -78,6 +79,9 @@
         credhub set -t value -n '/concourse/main/sandbox/ops-manager-password' -v "$(openssl rand -base64 16)" && \
         credhub set -t value -n '/concourse/main/sandbox/ops-manager-decryption-passphrase' -v "$(openssl rand -base64 32)" && \
         credhub set -t ssh -n '/concourse/main/sandbox/ops_manager_ssh_private_key' -p <terraform output ops_manager_ssh_private_key> && \
+        credhub set -t value -n /concourse/main/install-ops-manager/rds_address -v <terraform output rds_address> && \
+        credhub set -t value -n /concourse/main/install-ops-manager/rds_port -v <terraform output rds_port> && \
+        credhub set -t value -n /concourse/main/install-ops-manager/rds_username -v <terraform output rds_username> && \
         credhub set -t value -n /concourse/main/sandbox/rds_password -v <terraform output rds_password>
         ```
 

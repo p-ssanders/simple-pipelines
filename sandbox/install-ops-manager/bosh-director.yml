@@ -99,7 +99,7 @@ properties-configuration:
       host: ((rds_address))
       port: "3306"
       tls_enabled: false
-      user: ((rds_user))
+      user: ((rds_username))
       password: ((rds_password))
     hm_emailer_options:
       enabled: false
