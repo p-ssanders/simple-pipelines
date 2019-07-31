@@ -39,14 +39,12 @@ The work was done on AWS, but can be adapted, conceptually, for any IaaS.
     sudo chown <username>:<group> ../sandbox/certs
     ```
 
-##  Pave the Iaas
-
-Pave the IaaS for your PKS using the included [Terraform](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/terraform).
-
 ##  Deploy Pipelines
 
 1. Deploy and run the [Test Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/test) to confirm your setup.
 
-1. Deploy and run the [Install Ops Manager Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/install-ops-manager).
+1. Deploy and run the [Terraform Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/terraform) to pave your IaaS for PKS.
 
-1. Deploy and run the [Install PKS Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/install-pks).
+1. Deploy and run the [Install Ops Manager Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/install-ops-manager) to create an Ops Manager VM and deploy a BOSH Director on your paved IaaS.
+
+1. Deploy and run the [Install PKS Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/install-pks) to deploy PKS.

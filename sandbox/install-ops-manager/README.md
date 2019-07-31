@@ -42,13 +42,6 @@
 
     Note: This approach leverages Concourse's [Credential Lookup Rules](https://concourse-ci.org/credhub-credential-manager.html#credential-lookup-rules)
 
-    Note: Create a git deploy key for your repository following [these instructions](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys).
-
-    *   Convert Let's Encrypt Private Key to RSA
-        ```
-        openssl rsa -in ../certs/privkey.pem -out ../certs/private_key.pem.rsa.key
-        ```
-
     *   Update Entries in the Control Plane Credhub
 
         ```
@@ -65,16 +58,9 @@
 
     *   Or, Create Entries in the Control Plane Credhub
 
-        Let:
-        * `ca.pem` contains the contents of `../certs/chain.pem`
-        * `certificate.pem` contains the contents of `../certs/cert.pem`
-        * `private_key.pem` contains the contents of `../certs/private_key.pem`
-
         ```
-        credhub set -t ssh -n /concourse/main/git-deploy-key --private id_rsa --public id_rsa.pub && \
         credhub set -t value -n /concourse/main/credhub-client -v credhub_admin_client && \
         credhub set -t value -n /concourse/main/credhub-secret -v <YOUR CONTROL PLANE CREDHUB SECRET> && \
-        credhub set -t certificate -n /concourse/main/lets_encrypt_cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)" && \
 
         credhub set -t value -n /concourse/main/sandbox/pivnet-api-token -v <YOUR PIVNET API TOKEN> && \
         credhub set -t value -n /concourse/main/sandbox/access_key_id -v <YOUR ACCESS KEY> && \
