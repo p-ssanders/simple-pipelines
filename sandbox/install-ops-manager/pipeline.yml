@@ -139,6 +139,7 @@ jobs:
         config: interpolated-config
     - task: configure-tls
       image: platform-automation-image
+      file: configuration/tasks/configure-ops-manager-tls.yml
       params:
         ENV_FILE: sandbox/env.yml
         CERTIFICATE_PEM: |
@@ -147,18 +148,6 @@ jobs:
         PRIVATE_KEY_PEM: ((lets_encrypt_cert.private_key))
       input_mapping:
         env: interpolated-config
-      config: # TODO migrate this to a file in tasks/
-        platform: linux
-        inputs:
-        - name: env
-        run:
-          path: bash
-          args:
-            - "-c"
-            - |
-              om --env env/"${ENV_FILE}" update-ssl-certificate \
-              --certificate-pem "$CERTIFICATE_PEM" \
-              --private-key-pem "$PRIVATE_KEY_PEM"
     - task: create-bosh-director-database
       image: platform-automation-image
       file: configuration/tasks/create-bosh-database.yml
