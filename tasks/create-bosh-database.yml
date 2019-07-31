@@ -14,11 +14,12 @@ run:
   - |
     set -x
 
-    echo "${OPS_MANAGER_SSH_PRIVATE_KEY}" > ssh-private-key
-
+    mkdir ~/.ssh
     ssh-keyscan -H "${OPS_MANAGER_HOST}" >> ~/.ssh/known_hosts
 
-    ssh -i ssh-private-key ubuntu@"${OPS_MANAGER_HOST}" << EOF
+    echo "${OPS_MANAGER_SSH_PRIVATE_KEY}" > ssh-private-key
+
+    ssh -T -i ssh-private-key ubuntu@"${OPS_MANAGER_HOST}" << EOF
       mysql \
       --host="${RDS_ADDRESS}" \
       --port="${RDS_PORT}" \
