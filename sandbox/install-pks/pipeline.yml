@@ -14,7 +14,7 @@ resources:
     secret_access_key: ((secret_access_key))
     region: us-east-1
     bucket: com.fionathebluepittie.sandbox
-    regexp: platform-automation-image-(.*).tgz
+    regexp: platform-automation/platform-automation-image-(.*).tgz
 
 - name: platform-automation-tasks
   type: s3
@@ -23,7 +23,7 @@ resources:
     secret_access_key: ((secret_access_key))
     region: us-east-1
     bucket: com.fionathebluepittie.sandbox
-    regexp: platform-automation-tasks-(.*).zip
+    regexp: platform-automation/platform-automation-tasks-(.*).zip
 
 - name: pks-product
   type: s3
@@ -33,6 +33,15 @@ resources:
     region: us-east-1
     bucket: com.fionathebluepittie.sandbox
     regexp: pks/products/pivotal-container-service-(.*).pivotal
+
+- name: pks-backup
+  type: s3
+  source:
+    access_key_id: ((access_key_id))
+    secret_access_key: ((secret_access_key))
+    region: us-east-1
+    bucket: com.fionathebluepittie.sandbox
+    versioned_file: pks/backups/pivotal-container-service.yml
 
 jobs:
 - name: download-pks
@@ -178,3 +187,42 @@ jobs:
         ENV_FILE: sandbox/env.yml
       input_mapping:
         env: interpolated-config
+
+- name: backup-pks
+  plan:
+    - aggregate:
+      - get: platform-automation-tasks
+        params:
+          unpack: true
+      - get: platform-automation-image
+        params:
+          unpack: true
+      - get: configuration
+        passed:
+        - apply-changes
+        trigger: true
+    - task: credhub-interpolate
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/credhub-interpolate.yml
+      params:
+        CREDHUB_CLIENT: ((credhub-client))
+        CREDHUB_SECRET: ((credhub-secret))
+        CREDHUB_SERVER: "https://credhub.control.fionathebluepittie.com:8844"
+        CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
+        PREFIX: /concourse/main/sandbox
+        INTERPOLATION_PATHS: sandbox
+      input_mapping:
+        files: configuration
+      output_mapping:
+        interpolated-files: interpolated-config
+    - task: backup-pks
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/staged-config.yml
+      input_mapping:
+        env: interpolated-config
+      params:
+        PRODUCT_NAME: pivotal-container-service
+        ENV_FILE: sandbox/env.yml
+    - put: pks-backup
+      params:
+        file: generated-config/*
