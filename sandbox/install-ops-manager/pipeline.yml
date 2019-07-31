@@ -168,6 +168,7 @@ jobs:
         RDS_USERNAME: ((rds_username))
         RDS_PASSWORD: ((rds_password))
         OPS_MANAGER_SSH_PRIVATE_KEY: ((ops_manager_ssh_private_key.private_key))
+        OPS_MANAGER_HOST: pcf.sandbox.fionathebluepittie.com
     - task: configure-bosh-director
       image: platform-automation-image
       file: platform-automation-tasks/tasks/configure-director.yml
