@@ -7,12 +7,6 @@ resources:
     private_key: ((git-deploy-key.private_key))
     branch: master
 
-- name: terraform-image
-  type: docker-image
-  source:
-    repository: hashicorp/terraform
-    tag: 0.11.14
-
 - name: platform-automation-image
   type: s3
   source:
@@ -40,32 +34,7 @@ resources:
     bucket: com.fionathebluepittie.sandbox
     regexp: pks/products/pivotal-container-service-(.*).pivotal
 
-- name: daily-trigger
-  type: time
-  source:
-    interval: 24h
-
 jobs:
-# TODO migrate this to install-ops-manager pipeline
-- name: pave-iaas
-  plan:
-    - aggregate:
-      - get: terraform-image
-      - get: configuration
-      - get: daily-trigger
-        trigger: true
-    - task: terraform-apply
-      image: terraform-image
-      file: configuration/tasks/terraform-apply.yml
-      input_mapping:
-        configuration: configuration
-      params:
-        CONFIG_DIR: terraform/terraforming-pks
-        TF_VAR_access_key: ((access_key_id))
-        TF_VAR_secret_key: ((secret_access_key))
-        TF_VAR_ssl_cert: ((lets_encrypt_cert.certificate))
-        TF_VAR_ssl_private_key: ((lets_encrypt_cert.private_key))
-
 - name: download-pks
   plan:
     - aggregate:
