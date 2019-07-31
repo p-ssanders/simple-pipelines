@@ -26,5 +26,5 @@ run:
       --port="${RDS_PORT}" \
       --user="${RDS_USERNAME}" \
       --password="${RDS_PASSWORD}" \
-      --execute="create database bosh;"
+      --execute="create database if not exists bosh;"
     EOF
