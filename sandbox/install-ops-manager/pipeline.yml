@@ -49,12 +49,6 @@ resources:
     bucket: com.fionathebluepittie.sandbox
     regexp: ops-manager/installation-(.*).zip
 
-- name: mysql-image
-  type: docker-image
-  source:
-    repository: mysql
-    tag: 8.0
-
 jobs:
 - name: fetch-platform-automation
   plan:
@@ -82,7 +76,6 @@ jobs:
         - fetch-platform-automation
         params:
           unpack: true
-      - get: mysql-image
     - task: credhub-interpolate
       image: platform-automation-image
       file: platform-automation-tasks/tasks/credhub-interpolate.yml
@@ -167,13 +160,14 @@ jobs:
               --certificate-pem "$CERTIFICATE_PEM" \
               --private-key-pem "$PRIVATE_KEY_PEM"
     - task: create-bosh-director-database
-      image: mysql-image
+      image: platform-automation-image
       file: configuration/tasks/create-bosh-database.yml
       params:
         RDS_ADDRESS: ((rds_address))
         RDS_PORT: ((rds_port))
         RDS_USERNAME: ((rds_username))
         RDS_PASSWORD: ((rds_password))
+        OPS_MANAGER_SSH_PRIVATE_KEY: ((ops_manager_ssh_private_key.private_key))
     - task: configure-bosh-director
       image: platform-automation-image
       file: platform-automation-tasks/tasks/configure-director.yml

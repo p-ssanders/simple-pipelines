@@ -55,6 +55,7 @@
         credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_access_key' -v <terraform output ops_manager_iam_user_access_key> && \
         credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_secret_key' -v <terraform output ops_manager_iam_user_secret_key> && \
         credhub set -t ssh -n '/concourse/main/sandbox/ops_manager_ssh_private_key' -p <terraform output ops_manager_ssh_private_key> && \
+        credhub set -t ssh -n '/concourse/main/install-ops-manager/ops_manager_ssh_private_key' -p <terraform output ops_manager_ssh_private_key> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_username -v <terraform output rds_username> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_password -v <terraform output rds_password>
         ```

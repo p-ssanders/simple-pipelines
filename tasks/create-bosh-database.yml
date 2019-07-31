@@ -5,17 +5,22 @@ params:
   RDS_PORT:
   RDS_USERNAME:
   RDS_PASSWORD:
+  OPS_MANAGER_HOST: pcf.sandbox.fionathebluepittie.com
+  OPS_MANAGER_SSH_PRIVATE_KEY:
 run:
   path: sh
   args:
   - "-c"
   - |
-
     set -x
 
-    mysql \
-    --host="${RDS_ADDRESS}" \
-    --port="${RDS_PORT}" \
-    --user="${RDS_USERNAME}" \
-    --password="${RDS_PASSWORD}" \
-    --execute="create database bosh;"
+    echo "${OPS_MANAGER_SSH_PRIVATE_KEY}" > ssh-private-key
+
+    ssh -i ssh-private-key ubuntu@"${OPS_MANAGER_HOST}" << EOF
+      mysql \
+      --host="${RDS_ADDRESS}" \
+      --port="${RDS_PORT}" \
+      --user="${RDS_USERNAME}" \
+      --password="${RDS_PASSWORD}" \
+      --execute="create database bosh;"
+    EOF
