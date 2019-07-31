@@ -12,8 +12,6 @@ run:
   args:
   - "-c"
   - |
-    set -x
-
     mkdir ~/.ssh
     ssh-keyscan -H "${OPS_MANAGER_HOST}" >> ~/.ssh/known_hosts
 
