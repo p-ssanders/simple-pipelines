@@ -52,10 +52,13 @@
     *   Update Entries in the Control Plane Credhub
 
         ```
-        credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_access_key' -v <terraform output ops_manager_iam_user_access_key> && \
-        credhub set -t value -n '/concourse/main/sandbox/ops_manager_iam_user_secret_key' -v <terraform output ops_manager_iam_user_secret_key> && \
-        credhub set -t ssh -n '/concourse/main/sandbox/ops_manager_ssh_private_key' -p <terraform output ops_manager_ssh_private_key> && \
-        credhub set -t ssh -n '/concourse/main/install-ops-manager/ops_manager_ssh_private_key' -p <terraform output ops_manager_ssh_private_key> && \
+        credhub set -t value -n /concourse/main/sandbox/ops_manager_iam_user_access_key -v <terraform output ops_manager_iam_user_access_key> && \
+        credhub set -t value -n /concourse/main/sandbox/ops_manager_iam_user_secret_key -v <terraform output ops_manager_iam_user_secret_key> && \
+        credhub set -t ssh -n /concourse/main/sandbox/ops_manager_ssh_private_key -p <terraform output ops_manager_ssh_private_key> && \
+
+        credhub set -t ssh -n /concourse/main/install-ops-manager/ops_manager_ssh_private_key -p <terraform output ops_manager_ssh_private_key> && \
+        credhub set -t value -n /concourse/main/install-ops-manager/rds_address -v <terraform output rds_address> && \
+        credhub set -t value -n /concourse/main/install-ops-manager/rds_port -v <terraform output rds_port> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_username -v <terraform output rds_username> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_password -v <terraform output rds_password>
         ```
@@ -72,6 +75,7 @@
         credhub set -t value -n /concourse/main/credhub-client -v credhub_admin_client && \
         credhub set -t value -n /concourse/main/credhub-secret -v <YOUR CONTROL PLANE CREDHUB SECRET> && \
         credhub set -t certificate -n /concourse/main/lets_encrypt_cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)" && \
+
         credhub set -t value -n /concourse/main/sandbox/pivnet-api-token -v <YOUR PIVNET API TOKEN> && \
         credhub set -t value -n /concourse/main/sandbox/access_key_id -v <YOUR ACCESS KEY> && \
         credhub set -t value -n /concourse/main/sandbox/secret_access_key -v <YOUR SECRET KEY> && \
@@ -80,6 +84,8 @@
         credhub set -t value -n /concourse/main/sandbox/ops-manager-password -v "$(openssl rand -base64 16)" && \
         credhub set -t value -n /concourse/main/sandbox/ops-manager-decryption-passphrase -v "$(openssl rand -base64 32)" && \
         credhub set -t ssh -n /concourse/main/sandbox/ops_manager_ssh_private_key -p <terraform output ops_manager_ssh_private_key> && \
+
+        credhub set -t ssh -n /concourse/main/install-ops-manager/ops_manager_ssh_private_key -p <terraform output ops_manager_ssh_private_key> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_address -v <terraform output rds_address> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_port -v <terraform output rds_port> && \
         credhub set -t value -n /concourse/main/install-ops-manager/rds_username -v <terraform output rds_username> && \
