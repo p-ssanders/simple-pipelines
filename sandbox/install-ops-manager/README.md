@@ -1,6 +1,7 @@
 #   Install Ops Manager Pipeline
 
-1.  [Pave the IaaS](../../terraform/README.md) for PKS
+1.  [Fetch Platform Automation](../fetch-platform-automation/)
+1.  [Pave the IaaS](../terraform/) for PKS
 
 1.  Update the following files with the values output from Terraform:
     *   `bosh-director-vars.yml`

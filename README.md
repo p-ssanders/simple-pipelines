@@ -41,10 +41,12 @@ The work was done on AWS, but can be adapted, conceptually, for any IaaS.
 
 ##  Deploy Pipelines
 
-1. Deploy and run the [Test Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/test) to confirm your setup.
+1.  Deploy and run the [Test Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/test) to confirm your setup.
 
-1. Deploy and run the [Terraform Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/terraform) to pave your IaaS for PKS.
+1.  Deploy and run the [Fetch Platform Automation Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/fetch-platform-automation) to have Platform Automation available in S3
 
-1. Deploy and run the [Install Ops Manager Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/install-ops-manager) to create an Ops Manager VM and deploy a BOSH Director on your paved IaaS.
+1.  Deploy and run the [Terraform Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/terraform) to pave your IaaS for PKS.
 
-1. Deploy and run the [Install PKS Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/install-pks) to deploy PKS.
+1.  Deploy and run the [Install Ops Manager Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/install-ops-manager) to create an Ops Manager VM and deploy a BOSH Director on your paved IaaS.
+
+1.  Deploy and run the [Install PKS Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/install-pks) to deploy PKS.

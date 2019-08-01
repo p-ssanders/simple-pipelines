@@ -1,11 +1,4 @@
 ---
-resource_types:
-- name: pivnet
-  type: docker-image
-  source:
-    repository: pivotalcf/pivnet-resource
-    tag: latest-final
-
 resources:
 - name: configuration
   type: git
@@ -13,14 +6,6 @@ resources:
     uri: git@github.com:p-ssanders/simple-pipelines.git
     private_key: ((git-deploy-key.private_key))
     branch: master
-
-- name: platform-automation-pivnet
-  type: pivnet
-  source:
-    api_token: ((pivnet-api-token))
-    product_slug: platform-automation
-    product_version: 3\.0
-    sort_by: semver
 
 - name: platform-automation-image
   type: s3
@@ -50,30 +35,14 @@ resources:
     regexp: ops-manager/installation-(.*).zip
 
 jobs:
-- name: fetch-platform-automation
-  plan:
-  - get: platform-automation-pivnet
-    trigger: true
-  - aggregate:
-    - put: platform-automation-image
-      params:
-        file: platform-automation-pivnet/*image*.tgz
-    - put: platform-automation-tasks
-      params:
-        file: platform-automation-pivnet/*tasks*.zip
-
 - name: install-ops-manager
   plan:
     - aggregate:
       - get: configuration
       - get: platform-automation-tasks
-        passed:
-        - fetch-platform-automation
         params:
           unpack: true
       - get: platform-automation-image
-        passed:
-        - fetch-platform-automation
         params:
           unpack: true
     - task: credhub-interpolate
