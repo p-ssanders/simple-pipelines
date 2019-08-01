@@ -50,3 +50,5 @@ The work was done on AWS, but can be adapted, conceptually, for any IaaS.
 1.  Deploy and run the [Install Ops Manager Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/blob/master/sandbox/install-ops-manager) to create an Ops Manager VM and deploy a BOSH Director on your paved IaaS.
 
 1.  Deploy and run the [Install PKS Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/install-pks) to deploy PKS.
+
+1.  Deploy and run the [Install Compliance Scanner Pipeline](https://github.com/pivotal-samuel-sanders/pcf-automation/tree/master/sandbox/install-compliance-scanner) to deploy Compliance Scanner for PCF.
