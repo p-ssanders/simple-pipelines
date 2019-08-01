@@ -145,7 +145,42 @@ jobs:
     input_mapping:
       product: compliance-scanner-product
       env: interpolated-config
-# - name: configure-compliance-scanner
+
+- name: configure-compliance-scanner
+  plan:
+    - get: platform-automation-tasks
+      params:
+        unpack: true
+    - get: platform-automation-image
+      params:
+        unpack: true
+    - get: configuration
+      trigger: true
+      passed:
+      - upload-and-stage-compliance-scanner
+    - task: credhub-interpolate
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/credhub-interpolate.yml
+      input_mapping:
+        files: configuration
+      output_mapping:
+        interpolated-files: interpolated-config
+      params:
+        CREDHUB_CLIENT: ((credhub-client))
+        CREDHUB_SECRET: ((credhub-secret))
+        CREDHUB_SERVER: "https://credhub.control.fionathebluepittie.com:8844"
+        CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
+        PREFIX: /concourse/main/sandbox
+        INTERPOLATION_PATHS: sandbox
+    - task: configure
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/configure-product.yml
+      input_mapping:
+        env: interpolated-config
+        config: interpolated-config
+      params:
+        ENV_FILE: sandbox/env.yml
+        CONFIG_FILE: sandbox/install-compliance-scanner/compliance-scanner-config.yml
 # - name: apply-changes
 # - name: backup-compliance-scanner
 # - name: run-scan

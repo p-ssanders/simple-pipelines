@@ -1,0 +1,40 @@
+product-name: p-compliance-scanner
+product-properties:
+  .properties.benchmarks:
+    value:
+    - base
+    - recommended
+    - strict
+    - stig
+  .properties.ntp_server:
+    value: 0.amazon.pool.ntp.org
+  .properties.openfile_limit:
+    value: 2048
+  .properties.scan_report_formats:
+    value:
+    - csv
+    - xml
+    - html
+  .properties.scanner_timeout:
+    value: 1200
+  .properties.syslog_host:
+    value: 192.0.2.1
+  .properties.syslog_port:
+    value: 514
+network-properties:
+  network:
+    name: pks
+  other_availability_zones:
+  - name: us-east-1a
+  singleton_availability_zone:
+    name: us-east-1a
+resource-config:
+  oscap_store:
+    instances: automatic
+    instance_type:
+      id: automatic
+    internet_connected: false
+errand-config:
+  scan_results:
+    post-deploy-state: false
+
