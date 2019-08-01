@@ -41,7 +41,7 @@ resources:
     secret_access_key: ((secret_access_key))
     region: us-east-1
     bucket: com.fionathebluepittie.sandbox
-    regexp: compliance-scanner/bosh-stemcell-(.*).tgz
+    regexp: compliance-scanner/(.*)-stemcell-(.*).tgz
 
 jobs:
 - name: download-compliance-scanner
@@ -57,6 +57,8 @@ jobs:
   - task: credhub-interpolate
     image: platform-automation-image
     file: platform-automation-tasks/tasks/credhub-interpolate.yml
+    input_mapping:
+      files: configuration
     params:
       CREDHUB_CLIENT: ((credhub-client))
       CREDHUB_SECRET: ((credhub-secret))
@@ -64,26 +66,36 @@ jobs:
       CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
       PREFIX: /concourse/main/sandbox
       INTERPOLATION_PATHS: sandbox
-    input_mapping:
-      files: configuration
     output_mapping:
       interpolated-files: interpolated-config
   - task: download-compliance-scanner
     image: platform-automation-image
     file: platform-automation-tasks/tasks/download-product.yml
-    params:
-      CONFIG_FILE: sandbox/install-compliance-scanner/download-compliance-scanner.yml
     input_mapping:
       config: interpolated-config
-    output_mapping:
-      downloaded-stemcell: cs-stemcell
+    params:
+      CONFIG_FILE: sandbox/install-compliance-scanner/download-compliance-scanner.yml
   - aggregate:
     - put: compliance-scanner-product
       params:
         file: downloaded-product/p-compliance-scanner-*.pivotal
+    # - put: compliance-scanner-stemcell
+    #   params:
+    #     file: downloaded-stemcell/*.tgz
+    # - put: compliance-scanner-stemcell-config
+    #   params:
+    #     file: assign-stemcell-config/*.yml
+  - task: download-compliance-scanner-stemcell
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/download-product.yml
+    input_mapping:
+      config: interpolated-config
+    params:
+      CONFIG_FILE: sandbox/install-compliance-scanner/download-compliance-scanner-stemcell.yml
+  - aggregate:
     - put: compliance-scanner-stemcell
       params:
-        file: cs-stemcell/*.tgz
+        file: downloaded-product/*.tgz
 
 - name: upload-and-stage-compliance-scanner
   plan:
@@ -99,9 +111,17 @@ jobs:
       trigger: true
       passed:
       - download-compliance-scanner
+    - get: compliance-scanner-stemcell
+      trigger: true
+      passed:
+      - download-compliance-scanner
   - task: credhub-interpolate
     image: platform-automation-image
     file: platform-automation-tasks/tasks/credhub-interpolate.yml
+    input_mapping:
+      files: configuration
+    output_mapping:
+      interpolated-files: interpolated-config
     params:
       CREDHUB_CLIENT: ((credhub-client))
       CREDHUB_SECRET: ((credhub-secret))
@@ -109,19 +129,14 @@ jobs:
       CREDHUB_CA_CERT: ((lets_encrypt_cert.ca))
       PREFIX: /concourse/main/sandbox
       INTERPOLATION_PATHS: sandbox
-    input_mapping:
-      files: configuration
-    output_mapping:
-      interpolated-files: interpolated-config
   - task: upload-stemcell
     image: platform-automation-image
     file: platform-automation-tasks/tasks/upload-stemcell.yml
-    params:
-      ENV_FILE: sandbox/env.yml
-      CONFIG_FILE: sandbox/install-compliance-scanner/download-compliance-scanner.yml
     input_mapping:
       env: interpolated-config
       stemcell: compliance-scanner-stemcell
+    params:
+      ENV_FILE: sandbox/env.yml
   - task: upload-and-stage
     image: platform-automation-image
     file: platform-automation-tasks/tasks/upload-and-stage-product.yml
