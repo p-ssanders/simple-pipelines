@@ -15,3 +15,4 @@ This pipeline will install [Compliance Scanner for PCF](https://docs.pivotal.io/
 
     fly -t sam-ci unpause-pipeline -p install-compliance-scanner
     ```
+    * Note: The test pipeline has no triggers, so start it manually.
