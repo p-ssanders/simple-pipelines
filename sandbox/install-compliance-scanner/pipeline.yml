@@ -89,12 +89,6 @@ jobs:
     - put: compliance-scanner-product
       params:
         file: downloaded-product/p-compliance-scanner-*.pivotal
-    # - put: compliance-scanner-stemcell
-    #   params:
-    #     file: downloaded-stemcell/*.tgz
-    # - put: compliance-scanner-stemcell-config
-    #   params:
-    #     file: assign-stemcell-config/*.yml
   - task: download-compliance-scanner-stemcell
     image: platform-automation-image
     file: platform-automation-tasks/tasks/download-product.yml
@@ -263,4 +257,3 @@ jobs:
     - put: compliance-scanner-backup
       params:
         file: generated-config/*
-# - name: run-scan
