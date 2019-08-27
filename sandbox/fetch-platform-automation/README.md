@@ -4,6 +4,14 @@ This pipeline will download Platform Automation from PivNet, and store it in an 
 
 1.  Create bucket `com.fionathebluepittie.sandbox`
 1.  Create folder `platform-automation`
+1.  Store Pipeline Secrets in Credhub
+
+    Note: This approach leverages Concourse's [Credential Lookup Rules](https://concourse-ci.org/credhub-credential-manager.html#credential-lookup-rules)
+
+    ```
+    credhub set -t value -n /concourse/main/pivnet-api-token -v <YOUR PIVNET API TOKEN>
+    ```
+
 1.  Login to Concourse
     ```
     fly login --target sam-ci --team-name main --concourse-url https://plane.control.fionathebluepittie.com

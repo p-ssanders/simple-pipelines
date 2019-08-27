@@ -58,11 +58,10 @@ Note: the `modules` directory can probably be replaced with the `modules` direct
         Let:
         * `ca.pem` contains the contents of `../certs/chain.pem`
         * `certificate.pem` contains the contents of `../certs/cert.pem`
-        * `private_key.pem` contains the contents of `../certs/private_key.pem`
 
         ```
         credhub set -t ssh -n /concourse/main/git-deploy-key --private deploy-keys/id_rsa --public deploy-keys/id_rsa.pub && \
-        credhub set -t certificate -n /concourse/main/lets_encrypt_cert -r "$(cat certs/ca.pem)" -c "$(cat certs/cert.pem)" -p "$(cat certs/private_key.pem.rsa.key)" && \
+        credhub set -t certificate -n /concourse/main/lets_encrypt_cert -r "$(cat pks/certs/ca.pem)" -c "$(cat pks/certs/certificate.pem)" -p "$(cat pks/certs/private_key.pem.rsa.key)"
         ```
 
 1.  Login to Concourse
