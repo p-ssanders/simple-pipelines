@@ -62,7 +62,7 @@
 
 1.  Login to PKS API
     ```
-    eval "$(om bosh-env -i /tmp/pks-opsmgrkey)"
+    eval "$(om bosh-env -i /tmp/pks-om-private-key.pem)"
     ADMIN_PASSWORD=$(om credentials \
     -p pivotal-container-service \
     -c '.properties.uaa_admin_password' \
@@ -75,12 +75,15 @@
     ```
     pks clusters
     pks create-cluster cluster-1 --num-nodes 3 --plan small --external-hostname cluster-1.sandbox.fionathebluepittie.com
-    watch pks cluster cluster-1
     ```
 
-1.  Create a Load Balancer for the Cluster
+1.  Configure Access to the Cluster
 
-    Use instructions at https://docs.pivotal.io/pks/1-4/aws-cluster-load-balancer.html#create
+    *   Follow instructions at https://docs.pivotal.io/pks/1-4/aws-cluster-load-balancer.html#create to create a load balancer
+    *   Be sure to add the `pks_master` security group to the load balancer
+    *   Add the `pks_master` security group to the cluster master instance **TODO how to automate this?**
+    *   Add an `A` record for the cluster external hostname that maps to the load balancer
+    *   Tag each public subnet with `kubernetes.io/cluster/service-instance_CLUSTER-UUID`. Replace `CLUSTER_UUID` with the cluster UUID. Leave the Value field empty.
 
 1.  Access the Cluster
     ```
@@ -115,8 +118,19 @@
     *   Run: `kubectl proxy`
     *   Browse to: http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy and select `~/.kube/config` if prompted to do so.
 
-1.  Deploy an App
-    *   Tag public subnets with the cluster information by following instructions at https://docs.pivotal.io/pks/1-4/deploy-workloads.html#aws
+1.  Deploy the [Slack Talkers](https://github.com/p-ssanders/slack-talkers) App
 
-        This will allow Kubernetes to ceate load balancers for services **(?)**
-    *   Follow instructions at https://kubernetes.io/docs/tutorials/stateless-application/guestbook/ to deploy an app
+    ```
+    git clone git@github.com:p-ssanders/slack-talkers.git
+    cd slack-talkers
+
+    kubectl create secret generic slack-api-token --from-literal=SLACK_API_TOKEN=<YOUR SLACK API TOKEN>
+
+    kubectl apply -f k8s-manifest.yml
+    ```
+
+    Use `kubectl get services` to get the load balancer name. Browse to it on port `8080` to confirm functionality.
+
+    Create a DNS entry to map to the load balancer created.
+
+    To update, delete the pod. A new one will be created with the latest image from DockerHub.
