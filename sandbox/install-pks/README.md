@@ -118,19 +118,3 @@
     *   Run: `kubectl proxy`
     *   Browse to: http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy and select `~/.kube/config` if prompted to do so.
 
-1.  Deploy the [Slack Talkers](https://github.com/p-ssanders/slack-talkers) App
-
-    ```
-    git clone git@github.com:p-ssanders/slack-talkers.git
-    cd slack-talkers
-
-    kubectl create secret generic slack-api-token --from-literal=SLACK_API_TOKEN=<YOUR SLACK API TOKEN>
-
-    kubectl apply -f k8s-manifest.yml
-    ```
-
-    Use `kubectl get services` to get the load balancer name. Browse to it on port `8080` to confirm functionality.
-
-    Create a DNS entry to map to the load balancer created.
-
-    To update, delete the pod. A new one will be created with the latest image from DockerHub.
